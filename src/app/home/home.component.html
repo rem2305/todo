@@ -1,0 +1,28 @@
+<h1 class="text-center text-muted">{{title}}</h1>
+
+<!-- *ngFor="" permet de boucler sur un tableau d'objet ex: tasks (directive structurelle)  -->
+<!-- [ngClass]="" directive d'attribut permet d'attribuer une classe de manière dynamique -->
+<section class="row">
+    <div class="col-md-7 mx-auto">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let task of tasks" [ngClass]="{finish:task.isDone == true, notFinish: task.isDone == false}">
+                <strong>{{task.title}}</strong>
+                <div class="text-end">
+                    <button class="btn btn-warning m-1" [disabled]="task.isDone" (click)="onChangeStatus(task)">En cours</button>
+                    <button class="btn btn-success" [disabled]="!task.isDone" (click)="onChangeStatus(task)">Terminé</button>
+                    <button class="btn btn-primary m-1" (click)="onHiddenStatus(task)">Masquer</button>
+                </div>
+                <div>
+                    <!-- <input type="text" class="form-control" [(ngModel)]="task.title" [ngClass]="{hidden:task.isModif == true, notHidden: task.isModif == false}"> -->
+                    <input *ngIf="task.isModif == true" type="text" class="form-control" [(ngModel)]="task.title">
+            
+                </div>
+
+
+
+            </li>
+            
+        </ul>
+    </div>
+</section>
+
